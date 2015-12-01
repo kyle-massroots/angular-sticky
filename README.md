@@ -28,4 +28,8 @@ for it as follows:
 
     <div sticky use-placeholder>I'm all sticky</div>
 
+To stick the element as soon as the page has scrolled from the top, use `sticky-immediately`. Use the directive as follows:
+
+    <div stick sticky-immediately>I'm all sticky</div>
+
 See the example directory for a working example.
