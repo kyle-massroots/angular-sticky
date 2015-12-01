@@ -66,7 +66,7 @@
     };
   }
 
-  function stickElement() {
+  function stickElement(item) {
     item.element.addClass("stuck");
     item.isStuck = true;
 
