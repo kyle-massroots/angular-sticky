@@ -21,10 +21,10 @@
               var item = scope._stickyElements[i];
 
               if (attrs.stickyImmediate !== undefined) {
-                if (!item.isStuck && post > 0) {
+                if (!item.isStuck && pos > 0) {
                   stickElement(item);
                 }
-                else if (item.isStuck && post <= 0) {
+                else if (item.isStuck && pos <= 0) {
                   unStickElement(item);
                 }
               }
