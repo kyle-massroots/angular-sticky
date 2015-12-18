@@ -15,6 +15,7 @@
 
           $win.bind("scroll.sticky", function(e) {
             var pos = $win.scrollTop();
+            var fixed = $win[0].document.body.style.position === "fixed";
 
             for (var i=0; i<scope._stickyElements.length; i++) {
 
@@ -24,26 +25,15 @@
                 if (!item.isStuck && pos > 0) {
                   stickElement(item);
                 }
-                else if (item.isStuck && pos <= 0) {
+                else if (item.isStuck && pos <= 0 && !fixed) {
                   unStickElement(item);
                 }
               }
-              if (attrs.stickyBottom) {
-                var pageHeight = $win[0].document.documentElement.scrollHeight;
-                var windowHeight = $win[0].innerHeight;
-
-                if (item.isStuck && (pos + windowHeight) > (pageHeight - item.bottom)) {
-                  unStickElement(item);
-                }
-                else if (!item.isStuck && (pos + windowHeight) < (pageHeight - item.bottom)) {
-                  stickElement(item);
-                }
-              }
-              if (!attrs.stickyImmediate && !attrs.stickyBottom) {
+              if (!attrs.stickyImmediate) {
                 if (!item.isStuck && pos > item.start) {
                   stickElement(item);
                 }
-                else if (item.isStuck && pos < item.start) {
+                else if (item.isStuck && pos < item.start && !fixed) {
                   unStickElement(item);
                 }
               }
@@ -68,8 +58,7 @@
           element: element,
           isStuck: false,
           placeholder: attrs.usePlaceholder !== undefined,
-          start: element.offset().top,
-          bottom: parseInt(attrs.stickyBottom, 10)
+          start: element.offset().top
         };
 
         scope._stickyElements.push(item);
